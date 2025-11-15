@@ -1,0 +1,25 @@
+public class LogicalOperators {
+    public static void main(String[] args) {
+        boolean a = true;
+        boolean b = false;
+        int x = 10;
+        int y = 5;
+      
+        System.out.println("AND (&&) Examples:");
+        System.out.println("a && b: " + (a && b)); 
+        System.out.println("(x > 5) && (y < 10): " + ((x > 5) && (y < 10))); 
+       
+        System.out.println("\nOR (||) Examples:");
+        System.out.println("a || b: " + (a || b));  
+        System.out.println("(x < 5) || (y > 10): " + ((x < 5) || (y > 10)));
+
+        System.out.println("\nNOT (!) Examples:");
+        System.out.println("!a: " + (!a)); 
+        System.out.println("!b: " + (!b));
+        System.out.println("!(x == y): " + (!(x == y)));
+       
+        System.out.println("\nCombined Examples:");
+        System.out.println("(a || b) && (x > y): " + ((a || b) && (x > y))); 
+        System.out.println("!(a && b) || (x != y): " + (!(a && b) || (x != y)));
+    }
+}

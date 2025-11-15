@@ -1,0 +1,36 @@
+public class ArrayExample {
+    public static void main(String[] args) {
+       
+        int[] numbers = {10, 20, 30, 40, 50};
+        String[] fruits = new String[3];
+        
+        fruits[0] = "Apple";
+        fruits[1] = "Banana";
+        fruits[2] = "Orange";
+       
+        System.out.println("Numbers array:");
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("numbers[" + i + "] = " + numbers[i]);
+        }
+        
+        System.out.println("\nFruits array:");
+        // Enhanced for loop (for-each)
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+
+        System.out.println("\nArray Operations:");
+        System.out.println("First number: " + numbers[0]);
+        System.out.println("Last fruit: " + fruits[fruits.length - 1]);
+        System.out.println("Array length - numbers: " + numbers.length);
+
+        numbers[2] = 35;
+        System.out.println("Modified numbers[2]: " + numbers[2]);
+
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        System.out.println("Sum of numbers: " + sum);
+    }
+}

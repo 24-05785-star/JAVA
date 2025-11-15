@@ -1,0 +1,108 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class ExceptionHandlingExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("=== Exception Handling Demo ===");
+      
+        try {
+            System.out.print("\nEnter first number: ");
+            int num1 = scanner.nextInt();
+            System.out.print("Enter second number: ");
+            int num2 = scanner.nextInt();
+            
+            int result = divideNumbers(num1, num2);
+            System.out.println("Division result: " + result);
+            
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Cannot divide by zero!");
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Please enter valid integers!");
+            scanner.nextLine();
+        }
+
+        try {
+            int[] numbers = {10, 20, 30};
+            System.out.print("\nEnter array index to access (0-2): ");
+            int index = scanner.nextInt();
+            System.out.println("Value at index " + index + ": " + numbers[index]);
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Invalid array index! Please use 0, 1, or 2.");
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Please enter a valid integer!");
+            scanner.nextLine();
+        }
+
+        try {
+            System.out.print("\nEnter your age: ");
+            int age = scanner.nextInt();
+            
+            validateAge(age);
+            System.out.println("Age validation successful!");
+            
+        } catch (IllegalArgumentException | InputMismatchException e) {
+            System.out.println("Error: " + e.getMessage());
+            if (e instanceof InputMismatchException) {
+                scanner.nextLine();
+            }
+        }
+
+        try {
+            System.out.print("\nEnter a number to square: ");
+            int number = scanner.nextInt();
+            int square = calculateSquare(number);
+            System.out.println("Square of " + number + " is: " + square);
+            
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Invalid input! Please enter a number.");
+            scanner.nextLine();
+        } finally {
+            System.out.println("This block always executes - cleanup done!");
+        }
+
+        try {
+            System.out.print("\nEnter a username: ");
+            String username = scanner.next();
+            validateUsername(username);
+            System.out.println("Username '" + username + "' is valid!");
+            
+        } catch (InvalidUsernameException e) {
+            System.out.println("Custom Exception: " + e.getMessage());
+        }
+        
+        scanner.close();
+        System.out.println("\n=== Program Completed ===");
+    }
+
+    public static int divideNumbers(int a, int b) {
+        return a / b;
+    }
+    
+    public static void validateAge(int age) {
+        if (age < 0 || age > 150) {
+            throw new IllegalArgumentException("Age must be between 0 and 150!");
+        }
+    }
+  
+    public static int calculateSquare(int num) {
+        return num * num;
+    }
+
+    public static void validateUsername(String username) throws InvalidUsernameException {
+        if (username == null || username.length() < 3) {
+            throw new InvalidUsernameException("Username must be at least 3 characters long!");
+        }
+        if (username.contains(" ")) {
+            throw new InvalidUsernameException("Username cannot contain spaces!");
+        }
+    }
+}
+
+class InvalidUsernameException extends Exception {
+    public InvalidUsernameException(String message) {
+        super(message);
+    }
+}

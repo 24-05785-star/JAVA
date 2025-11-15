@@ -1,0 +1,140 @@
+abstract class Shape {
+    private String color;
+    
+    public Shape(String color) {
+        this.color = color;
+    }
+
+    public abstract double calculateArea();
+    public abstract double calculatePerimeter();
+
+    public void displayColor() {
+        System.out.println("This shape is " + color);
+    }
+
+    public String getColor() {
+        return color;
+    }
+}
+
+class Circle extends Shape {
+    private double radius;
+    
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+    
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * radius;
+    }
+    
+    public double getRadius() {
+        return radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double width;
+    
+    public Rectangle(String color, double length, double width) {
+        super(color);
+        this.length = length;
+        this.width = width;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return length * width;
+    }
+    
+    @Override
+    public double calculatePerimeter() {
+        return 2 * (length + width);
+    }
+    
+    public double getLength() {
+        return length;
+    }
+    
+    public double getWidth() {
+        return width;
+    }
+}
+
+class Triangle extends Shape {
+    private double base;
+    private double height;
+    private double side1;
+    private double side2;
+    
+    public Triangle(String color, double base, double height, double side1, double side2) {
+        super(color);
+        this.base = base;
+        this.height = height;
+        this.side1 = side1;
+        this.side2 = side2;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return 0.5 * base * height;
+    }
+    
+    @Override
+    public double calculatePerimeter() {
+        return base + side1 + side2;
+    }
+    
+    public double getBase() {
+        return base;
+    }
+    
+    public double getHeight() {
+        return height;
+    }
+}
+
+public class AbstractionExample {
+    public static void main(String[] args) {
+        Shape circle = new Circle("Red", 5.0);
+        Shape rectangle = new Rectangle("Blue", 4.0, 6.0);
+        Shape triangle = new Triangle("Green", 3.0, 4.0, 5.0, 4.0);
+
+        Shape[] shapes = {circle, rectangle, triangle};
+        
+        System.out.println("=== Shape Information ===");
+        for (Shape shape : shapes) {
+            shape.displayColor(); 
+            System.out.printf("Area: %.2f\n", shape.calculateArea());  
+            System.out.printf("Perimeter: %.2f\n", shape.calculatePerimeter());
+
+            if (shape instanceof Circle) {
+                Circle c = (Circle) shape;
+                System.out.println("Type: Circle, Radius: " + c.getRadius());
+            } else if (shape instanceof Rectangle) {
+                Rectangle r = (Rectangle) shape;
+                System.out.println("Type: Rectangle, Length: " + r.getLength() + ", Width: " + r.getWidth());
+            } else if (shape instanceof Triangle) {
+                Triangle t = (Triangle) shape;
+                System.out.println("Type: Triangle, Base: " + t.getBase() + ", Height: " + t.getHeight());
+            }
+            System.out.println();
+        }
+        
+        
+        System.out.println("=== Individual Shape Details ===");
+    
+        Circle myCircle = new Circle("Purple", 7.0);
+        myCircle.displayColor();
+        System.out.printf("Circle Area: %.2f\n", myCircle.calculateArea());
+        System.out.printf("Circle Circumference: %.2f\n", myCircle.calculatePerimeter());
+    }
+}
